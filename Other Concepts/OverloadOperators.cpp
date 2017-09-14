@@ -2,9 +2,7 @@
 // Created by Justin Chiu on 9/10/17.
 //
 
-
 #include<iostream>
-#include <sstream>
 
 using namespace std;
 
@@ -31,22 +29,17 @@ public:
     }
 };
 
-
 //Overload operators + and << for the class complex
 //+ should add two complex numbers as (a+ib) + (c+id) = (a+c) + i(b+d)
 //<< should print a complex number in the format "a+ib"
 
-Complex operator + (Complex x, Complex y){
-    stringstream ss;
-    ss << x.a + y.a << "+i" << x.b + y.b;
-    Complex newNumber;
-    newNumber.input(ss.str());
-    return newNumber;
+Complex operator + (Complex& num1, Complex& num2) {
+    return {num1.a + num2.a, //real part
+            num1.b + num2.b}; // complex part
 }
-
-void operator << (Complex x){
-     << x.a << "+i" << x.b;
-
+ostream& operator<<(ostream& outStream, Complex& output) {
+    outStream << output.a << "+i" << output.b;
+    return outStream;
 }
 
 int main() {
@@ -56,6 +49,6 @@ int main() {
         >> s2;
     x.input(s1);
     y.input(s2);
-    Complex z = x + y;
-    cout << z << endl;
+    Complex z = x+y;
+    cout<<z << endl;
 }
